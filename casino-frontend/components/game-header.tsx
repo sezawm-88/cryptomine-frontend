@@ -73,7 +73,7 @@ export function GameHeader({
           <MusicToggle />
 
           {/* Telemetry toggle */}
-          <button
+                  <button style={{ display: 'none' }}
             type="button"
             onClick={() => onToggleTelemetry(!telemetryMode)}
             aria-pressed={telemetryMode}
@@ -99,7 +99,7 @@ export function GameHeader({
                 }`}
               />
             </span>
-          </button>
+          </>
 
           {/* Balance */}
           <div className="cm-glass-soft flex h-[52px] items-center gap-2 rounded-2xl px-4">

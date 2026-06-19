@@ -30,7 +30,7 @@ export function CryptomineGame() {
   const [bet, setBet] = useState(10)
   const [mines, setMines] = useState(3)
   const [houseEdge, setHouseEdge] = useState(0.03)
-  const [telemetryMode, setTelemetryMode] = useState(true)
+  const [telemetryMode, setTelemetryMode] = useState(false)
 
   const [status, setStatus] = useState<RoundStatus>("idle")
   const [mineSet, setMineSet] = useState<Set<number>>(new Set())
@@ -229,7 +229,7 @@ export function CryptomineGame() {
             </div>
           </div>
 
-          <TelemetryPanel
+                  {/* <TelemetryPanel ... /> */}
             status={status}
             currentMult={status === "idle" ? 1 : currentMult}
             nextMult={nextMult}
