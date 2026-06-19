@@ -2,7 +2,7 @@
 
 import { Wallet } from "lucide-react"
 
-interface GameHeaderProps {
+interface GameHeaderProps 
     balance: number
     telemetryMode: boolean
     formatMoney: (amount: number) => string
