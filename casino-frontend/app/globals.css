@@ -1,0 +1,374 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-heading: var(--font-sans);
+  --font-sans: var(--font-geist-sans), 'Geist Fallback';
+  --font-mono: var(--font-geist-mono), 'Geist Mono Fallback';
+
+  /* CRYPTOMINE custom palette */
+  --color-obsidian: #07080c;
+  --color-obsidian-soft: #0c0e14;
+  --color-panel: #14171f;
+  --color-panel-soft: #1b1f29;
+  --color-panel-line: #2a2f3a;
+  --color-emerald-glow: #00f08a;
+  --color-emerald-deep: #00c46f;
+  --color-teal-glow: #2ee6c8;
+  --color-danger: #ff3b46;
+  --color-danger-soft: #ff6670;
+  --color-amber-glow: #ffc24d;
+  --color-gold: #ffd24d;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+}
+
+:root {
+  color-scheme: dark;
+  --background: #07080c;
+  --foreground: #f4f6fb;
+  --card: #14171f;
+  --card-foreground: #f4f6fb;
+  --muted: #1b1f29;
+  --muted-foreground: #8b93a3;
+  --border: #2a2f3a;
+  --input: #1b1f29;
+  --ring: #00f08a;
+  --primary: #00f08a;
+  --primary-foreground: #06130b;
+  --radius: 1rem;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    @apply font-sans;
+    background-color: var(--background);
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+}
+
+/* ===== iOS 27 "Liquid Glass" surfaces ===== */
+.cm-glass {
+  background: linear-gradient(
+    160deg,
+    color-mix(in oklab, var(--color-panel) 86%, transparent) 0%,
+    color-mix(in oklab, var(--color-obsidian-soft) 92%, transparent) 100%
+  );
+  backdrop-filter: blur(22px) saturate(160%);
+  -webkit-backdrop-filter: blur(22px) saturate(160%);
+  border: 1px solid color-mix(in oklab, white 9%, transparent);
+  box-shadow:
+    inset 0 1px 0 0 color-mix(in oklab, white 12%, transparent),
+    0 18px 50px -22px rgba(0, 0, 0, 0.8);
+}
+.cm-glass-soft {
+  background: linear-gradient(
+    160deg,
+    color-mix(in oklab, var(--color-panel-soft) 70%, transparent) 0%,
+    color-mix(in oklab, var(--color-panel) 80%, transparent) 100%
+  );
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  border: 1px solid color-mix(in oklab, white 7%, transparent);
+  box-shadow: inset 0 1px 0 0 color-mix(in oklab, white 8%, transparent);
+}
+.cm-hairline {
+  border: 1px solid color-mix(in oklab, white 8%, transparent);
+}
+
+/* ===== Animated ambient background ===== */
+@keyframes cm-aurora {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(4%, -3%, 0) scale(1.15);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+.cm-aurora-a {
+  animation: cm-aurora 18s ease-in-out infinite;
+}
+.cm-aurora-b {
+  animation: cm-aurora 24s ease-in-out infinite reverse;
+}
+
+@keyframes cm-float-grid {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 44px 44px;
+  }
+}
+.cm-grid-bg {
+  background-image:
+    linear-gradient(color-mix(in oklab, white 4%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in oklab, white 4%, transparent) 1px, transparent 1px);
+  background-size: 44px 44px;
+  animation: cm-float-grid 40s linear infinite;
+}
+
+/* ===== Buttons ===== */
+.cm-btn-sheen {
+  position: relative;
+  overflow: hidden;
+}
+.cm-btn-sheen::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    115deg,
+    transparent 30%,
+    color-mix(in oklab, white 45%, transparent) 50%,
+    transparent 70%
+  );
+  transform: translateX(-120%);
+  transition: none;
+}
+.cm-btn-sheen:hover::after {
+  animation: cm-sheen 0.9s ease;
+}
+@keyframes cm-sheen {
+  to {
+    transform: translateX(120%);
+  }
+}
+
+/* ---- Custom animations & effects ---- */
+@keyframes cm-pulse-gold {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 210, 77, 0.55), 0 0 26px 2px rgba(255, 210, 77, 0.4),
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(255, 210, 77, 0), 0 0 40px 8px rgba(255, 210, 77, 0.6),
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.4);
+  }
+}
+.cm-pulse-gold {
+  animation: cm-pulse-gold 1.5s ease-in-out infinite;
+}
+
+@keyframes cm-breathe {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(0, 240, 138, 0), 0 10px 30px -10px rgba(0, 240, 138, 0.5),
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.35);
+  }
+  50% {
+    box-shadow: 0 0 0 6px rgba(0, 240, 138, 0.08), 0 14px 40px -8px rgba(0, 240, 138, 0.7),
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.35);
+  }
+}
+.cm-breathe {
+  animation: cm-breathe 3s ease-in-out infinite;
+}
+
+@keyframes cm-shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-6px);
+  }
+  40% {
+    transform: translateX(6px);
+  }
+  60% {
+    transform: translateX(-4px);
+  }
+  80% {
+    transform: translateX(4px);
+  }
+}
+.cm-shake {
+  animation: cm-shake 0.45s ease-in-out;
+}
+
+@keyframes cm-pop {
+  0% {
+    transform: scale(0.6);
+    opacity: 0;
+  }
+  70% {
+    transform: scale(1.08);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+.cm-pop {
+  animation: cm-pop 0.28s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@keyframes cm-toast-in {
+  0% {
+    transform: translate(-50%, 24px);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(-50%, 0);
+    opacity: 1;
+  }
+}
+.cm-toast {
+  animation: cm-toast-in 0.32s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@keyframes cm-rise {
+  0% {
+    transform: translateY(10px) scale(0.9);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+.cm-rise {
+  animation: cm-rise 0.3s ease-out both;
+}
+
+/* 3D tile flip */
+.cm-flip {
+  transform-style: preserve-3d;
+  transition: transform 0.45s cubic-bezier(0.45, 0.05, 0.2, 1);
+}
+.cm-flip-back,
+.cm-flip-front {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+.cm-flip-front {
+  transform: rotateY(180deg);
+}
+.cm-flipped {
+  transform: rotateY(180deg);
+}
+
+/* range slider styling */
+.cm-range {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 8px;
+  border-radius: 9999px;
+  outline: none;
+}
+.cm-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 22px;
+  width: 22px;
+  border-radius: 9999px;
+  background: radial-gradient(circle at 35% 30%, #ffffff, #d7dbe6);
+  border: 2px solid #00f08a;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5), 0 0 14px rgba(0, 240, 138, 0.6);
+  transition: transform 0.15s ease;
+}
+.cm-range::-webkit-slider-thumb:active {
+  transform: scale(1.18);
+}
+.cm-range::-moz-range-thumb {
+  height: 22px;
+  width: 22px;
+  border-radius: 9999px;
+  background: radial-gradient(circle at 35% 30%, #ffffff, #d7dbe6);
+  border: 2px solid #00f08a;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5), 0 0 14px rgba(0, 240, 138, 0.6);
+}
+.cm-range-amber::-webkit-slider-thumb {
+  border-color: #ffc24d;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5), 0 0 14px rgba(255, 194, 77, 0.6);
+}
+.cm-range-amber::-moz-range-thumb {
+  border-color: #ffc24d;
+}
+
+/* reveal glow burst on safe tile */
+@keyframes cm-glow-burst {
+  0% {
+    box-shadow: 0 0 0 0 rgba(0, 240, 138, 0.6);
+  }
+  100% {
+    box-shadow: 0 0 0 18px rgba(0, 240, 138, 0);
+  }
+}
+.cm-glow-burst {
+  animation: cm-glow-burst 0.6s ease-out;
+}
+
+/* coin/score count flash */
+@keyframes cm-flash {
+  0% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1.18);
+    color: var(--color-emerald-glow);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+.cm-flash {
+  animation: cm-flash 0.4s ease;
+}
+
+/* equalizer bars for music indicator */
+@keyframes cm-eq {
+  0%,
+  100% {
+    transform: scaleY(0.35);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+.cm-eq-bar {
+  transform-origin: bottom;
+  animation: cm-eq 0.8s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cm-aurora-a,
+  .cm-aurora-b,
+  .cm-grid-bg,
+  .cm-pulse-gold,
+  .cm-breathe,
+  .cm-eq-bar {
+    animation: none !important;
+  }
+}
