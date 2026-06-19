@@ -98,10 +98,6 @@ export function GameHeader({
                   telemetryMode ? "translate-x-4" : "translate-x-0.5"
                 }`}
               />
-            </span>
-          </>
-
-          {/* Balance */}
           <div className="cm-glass-soft flex h-[52px] items-center gap-2 rounded-2xl px-4">
             <Wallet className="h-4 w-4 text-[var(--color-emerald-glow)]" />
             <div className="leading-tight">
