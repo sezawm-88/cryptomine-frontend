@@ -2,7 +2,7 @@
 
 import { useCallback, useMemo, useState } from "react"
 import { Play, TrendingDown, Zap } from "lucide-react"
-import { GameHeader } from "@/components/game-header"
+import GameHeader from "@/components/game-header"
 import { ControlPanel } from "@/components/control-panel"
 import { TelemetryPanel } from "@/components/telemetry-panel"
 import { GameTile } from "@/components/game-tile"
@@ -169,14 +169,13 @@ export function CryptomineGame() {
   return (
     <div className="relative min-h-dvh">
       <AmbientBackground />
-      <GameHeader
-        balance={balance}
-        telemetryMode={telemetryMode}
-        onToggleTelemetry={setTelemetryMode}
-        houseEdge={houseEdge}
-        onHouseEdgeChange={setHouseEdge}
-      />
-
+          <GameHeader
+              balance={balance}
+              telemetryMode={telemetryMode}
+              formatMoney={formatMoney}
+              onToggleTelemetry={() => setTelemetryMode(!telemetryMode)}
+              onHouseEdgeChange={(val) => setHouseEdge(val)}
+          />
       <main className="mx-auto grid max-w-[1400px] grid-cols-1 gap-4 px-4 py-4 md:px-6 md:py-6 lg:grid-cols-[minmax(300px,30%)_1fr]">
         {/* LEFT — control deck */}
         <section className="flex flex-col gap-4">
@@ -189,7 +188,6 @@ export function CryptomineGame() {
               balance={balance}
               status={status}
             />
-
             {/* Primary action */}
             <div className="mt-5">
               {status === "active" ? (
@@ -230,7 +228,6 @@ export function CryptomineGame() {
           </div>
                   {/* TelemetryPanel removed */}
         </section>
-
         {/* CENTER — grid stage */}
         <section className="flex flex-col gap-3">
           {/* round telemetry strip */}
@@ -273,7 +270,6 @@ export function CryptomineGame() {
               </span>
             </div>
           </div>
-
           {/* the grid */}
           <div
             className={`cm-glass relative rounded-3xl p-3 sm:p-5 ${
@@ -294,7 +290,6 @@ export function CryptomineGame() {
                 />
               ))}
             </div>
-
             {status === "idle" && (
               <div className="pointer-events-none absolute inset-0 flex items-center justify-center rounded-3xl bg-[var(--color-obsidian)]/40 backdrop-blur-[2px]">
                 <div className="cm-rise cm-glass rounded-2xl px-5 py-3 text-center">
@@ -306,7 +301,6 @@ export function CryptomineGame() {
           </div>
         </section>
       </main>
-
       {/* Toast */}
       {toast && (
         <div
