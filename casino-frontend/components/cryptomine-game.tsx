@@ -228,17 +228,7 @@ export function CryptomineGame() {
               )}
             </div>
           </div>
-
-                  {/* <TelemetryPanel ... /> */}
-            status={status}
-            currentMult={status === "idle" ? 1 : currentMult}
-            nextMult={nextMult}
-            potentialPayout={status === "idle" ? bet : potentialPayout}
-            picks={picks}
-            safeRemaining={safeRemaining}
-            houseEdge={houseEdge}
-            telemetryMode={telemetryMode}
-          />
+                  {/* TelemetryPanel removed */}
         </section>
 
         {/* CENTER — grid stage */}
