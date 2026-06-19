@@ -82,33 +82,27 @@ export function GameHeader({
                 ? "cm-glass-soft text-[var(--color-emerald-glow)] ring-1 ring-[var(--color-emerald-glow)]/40"
                 : "cm-glass-soft text-muted-foreground"
             }`}
-          >
-            <Activity className="h-4 w-4" />
-            <span className="hidden text-left leading-tight sm:block">
-              <span className="block text-[10px] font-semibold uppercase tracking-wider">Admin Telemetry</span>
-              <span className="block text-xs font-bold">{telemetryMode ? "ON" : "OFF"}</span>
-            </span>
-            <span
-              className={`relative h-5 w-9 rounded-full transition-colors ${
-                telemetryMode ? "bg-[var(--color-emerald-glow)]" : "bg-[var(--color-panel-line)]"
-              }`}
-            >
-              <span
-                className={`absolute top-0.5 h-4 w-4 rounded-full bg-white transition-transform ${
-                  telemetryMode ? "translate-x-4" : "translate-x-0.5"
-                }`}
-              />
-          <div className="cm-glass-soft flex h-[52px] items-center gap-2 rounded-2xl px-4">
-            <Wallet className="h-4 w-4 text-[var(--color-emerald-glow)]" />
-            <div className="leading-tight">
-              <span className="block text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
-                Balance
-              </span>
-              <span className="block font-mono text-sm font-bold text-foreground">{formatMoney(balance)}</span>
+                        {/* Admin Telemetry Panel (Hidden/None) */}
+         <div style={{ display: "none" }} className="flex items-center gap-2 text-muted-foreground border-l border-panel-line pl-4">
+                        <div className="flex flex-col items-end">
+                            <span className="block text-[10px] font-semibold uppercase tracking-wider">Admin Telemetry</span>
+                            <span className="block text-xs font-bold">{telemetryMode ? "ON" : "OFF"}</span>
+                        </div>
+                        <span className={`relative h-5 w-9 rounded-full transition-colors ${telemetryMode ? "bg-[var(--color-emerald-glow)]" : "bg-[var(--color-panel-line)]"}`}>
+                            <span className={`absolute top-0.5 h-4 w-4 rounded-full bg-white transition-transform ${telemetryMode ? "translate-x-4" : "translate-x-0.5"}`} />
+                        </span>
+                    </div>
+                    {/* Balance */}
+                    <div className="cm-glass-soft flex h-[52px] items-center gap-2 rounded-2xl px-4">
+                        <Wallet className="h-4 w-4 text-[var(--color-emerald-glow)]" />
+                        <div className="leading-tight">
+                            <span className="block text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">Balance</span>
+                            <span className="block font-mono text-sm font-bold text-text-foreground">{formatMoney(balance)}</span>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </header>
-  )
+        </header>
+    )
 }
+                    
